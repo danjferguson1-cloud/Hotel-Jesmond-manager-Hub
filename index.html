@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hotel Jesmond Hub</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1F2844">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --navy-button: #1F2844;
+            --logo-gold: #C5A021; 
+            --white-bg: #FFFFFF;
+            --text-dark: #1F2844;
+        }
+
+        body { 
+            margin: 0; 
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white-bg);
+            height: 100dvh; 
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .brand-header {
+            background-color: var(--navy-button);
+            padding: 20px 20px 10px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-container { width: 100%; max-width: 250px; }
+        .logo-hotel { font-family: 'Montserrat'; font-weight: 300; font-size: 11px; letter-spacing: 4px; color: var(--logo-gold); text-transform: uppercase; margin-bottom: 2px; }
+        .logo-line { width: 100%; height: 1px; background-color: var(--logo-gold); margin: 3px 0; opacity: 0.5; }
+        .logo-jesmond { font-family: 'Montserrat'; font-weight: 500; font-size: 26px; letter-spacing: 3px; color: var(--logo-gold); text-transform: uppercase; margin: 3px 0; }
+        .logo-location { font-family: 'Montserrat'; font-weight: 300; font-style: italic; font-size: 9px; color: white; opacity: 0.7; margin-top: 3px; }
+
+        .status-bar {
+            background-color: #161D32;
+            padding: 6px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--logo-gold);
+        }
+
+        .main-content { flex: 1; padding: 15px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .section-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 10px 5px; color: #A0AEC0; }
+
+        .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        
+        .tile {
+            background: var(--navy-button);
+            aspect-ratio: 1.2/1; 
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(31, 40, 68, 0.1);
+            padding: 5px;
+        }
+
+        .tile-icon { font-size: 20px; margin-bottom: 5px; }
+        .tile-label { font-size: 10px; font-weight: 700; color: white; text-align: center; line-height: 1.2;}
+
+        .checklist-card, .notes-card { background: var(--navy-button); border-radius: 15px; padding: 3px; margin-bottom: 20px; }
+        .task-row { display: flex; align-items: center; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .time-tag { font-size: 8px; font-weight: 900; color: var(--navy-button); background: var(--logo-gold); padding: 3px 6px; border-radius: 4px; margin-right: 10px; min-width: 50px; text-align: center; }
+        .task-label { font-size: 12px; font-weight: 600; flex: 1; color: white; }
+        
+        input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--logo-gold); }
+        .notes-area { width: 100%; background: transparent; border: none; color: white; padding: 12px; box-sizing: border-box; font-family: inherit; font-size: 13px; min-height: 90px; }
+
+        #alert-top { display: none; background: #E11D48; color: white; padding: 10px; text-align: center; font-size: 10px; font-weight: 800; position: sticky; top: 0; z-index: 1000; }
+    </style>
+</head>
+<body>
+
+    <div id="alert-top">🚨 5PM VIBE CHECK (LIGHTS/AUDIO)</div>
+
+    <div class="brand-header">
+        <div class="logo-container">
+            <div class="logo-hotel">Hotel</div>
+            <div class="logo-line"></div>
+            <div class="logo-jesmond">Jesmond</div>
+            <div class="logo-line"></div>
+            <div class="logo-location">Newcastle, Australia</div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div id="clock">--:-- --</div>
+        <div id="weather">☀️ UPDATING...</div>
+    </div>
+
+    <div class="main-content">
+        <div class="section-label">Management Hub</div>
+        <div class="button-grid">
+            <a href="deputy://" class="tile">
+                <div class="tile-icon">📅</div>
+                <div class="tile-label">Deputy<br>App</div>
+            </a>
+            <a href="https://wa.me/61477015554" class="tile">
+                <div class="tile-icon">💬</div>
+                <div class="tile-label">Manager<br>WhatsApp</div>
+            </a>
+            <a href="https://restaurant.nowbookit.com/" target="_blank" class="tile">
+                <div class="tile-icon">🍽️</div>
+                <div class="tile-label">Bistro<br>Bookings</div>
+            </a>
+            <a href="https://login.newbook.cloud" target="_blank" class="tile">
+                <div class="tile-icon">🏨</div>
+                <div class="tile-label">Room<br>Check-ins</div>
+            </a>
+            <a href="instagram://user?username=hoteljesmond" class="tile">
+                <div class="tile-icon">📸</div>
+                <div class="tile-label">Jesmond<br>Instagram</div>
+            </a>
+            <a href="fb://facewebmodal/f?href=https://www.facebook.com/hoteljesmond" class="tile">
+                <div class="tile-icon">🔵</div>
+                <div class="tile-label">Jesmond<br>Facebook</div>
+            </a>
+        </div>
+
+        <div class="section-label">Duty Checklist</div>
+        <div class="checklist-card">
+            <div class="task-row"><div class="time-tag">10:00 AM</div><div class="task-label">Safe Count</div><input type="checkbox" id="c-safe"></div>
+            <div class="task-row"><div class="time-tag">10:30 AM</div><div class="task-label">Cellar Check</div><input type="checkbox" id="c-cellar"></div>
+            <div class="task-row"><div class="time-tag" style="background:white; color:var(--navy-button)">05:00 PM</div><div class="task-label">Vibe Check</div><input type="checkbox" id="c-vibe"></div>
+            <div class="task-row"><div class="time-tag">12:00 AM</div><div class="task-label">Security Check</div><input type="checkbox" id="c-sec"></div>
+        </div>
+
+        <div class="section-label">Shift Handover Notes</div>
+        <div class="notes-card"><textarea id="shift-notes" class="notes-area" placeholder="Type shift notes here..."></textarea></div>
+    </div>
+
+    <script>
+        function checkAutoReset() {
+            const now = new Date();
+            const todayStr = now.toDateString();
+            const lastReset = localStorage.getItem('last-reset-date');
+            if (lastReset !== todayStr && now.getHours() >= 4) {
+                ['c-safe', 'c-cellar', 'c-vibe', 'c-sec', 'jesmond-notes'].forEach(key => localStorage.removeItem(key));
+                localStorage.setItem('last-reset-date', todayStr);
+                location.reload();
+            }
+        }
+
+        async function fetchWeather() {
+            try {
+                const res = await fetch('https://wttr.in/Newcastle,Australia?format=3');
+                const text = await res.text();
+                document.getElementById('weather').innerText = text ? text.trim().toUpperCase() : "NEWCASTLE, NSW";
+            } catch (e) { document.getElementById('weather').innerText = "NEWCASTLE, NSW"; }
+        }
+
+        function update() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+            const vibeDone = document.getElementById('c-vibe').checked;
+            document.getElementById('alert-top').style.display = (now.getHours() === 17 && !vibeDone) ? 'block' : 'none';
+            checkAutoReset();
+        }
+
+        window.onload = () => {
+            checkAutoReset();
+            ['safe', 'cellar', 'vibe', 'sec'].forEach(k => {
+                const id = 'c-' + k;
+                if (localStorage.getItem(id) === 'true') document.getElementById(id).checked = true;
+                document.getElementById(id).addEventListener('change', (e) => localStorage.setItem(id, e.target.checked));
+            });
+            const notesField = document.getElementById('shift-notes');
+            notesField.value = localStorage.getItem('jesmond-notes') || "";
+            notesField.addEventListener('input', (e) => localStorage.setItem('jesmond-notes', e.target.value));
+            fetchWeather();
+            setInterval(update, 10000);
+            update();
+        };
+    </script>
+</body>
+</html>
