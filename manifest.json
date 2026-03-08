@@ -1,0 +1,15 @@
+{
+  "short_name": "Jesmond Hub",
+  "name": "Hotel Jesmond Manager Hub",
+  "start_url": "index.html",
+  "background_color": "#1F2844",
+  "display": "standalone",
+  "theme_color": "#1F2844",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}
